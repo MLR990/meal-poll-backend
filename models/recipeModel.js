@@ -10,6 +10,11 @@ const recipeSchema = new mongoose.Schema({
     type: Number,
     default: 4,
   },
+  createdAt: {
+    type: Date,
+    default: Date.now(),
+    select: false,
+  },
   description: String,
 });
 

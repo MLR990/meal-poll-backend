@@ -6,6 +6,10 @@ const router = express.Router();
 // router.param('id', tourController.checkID);
 
 router
+  .route('/family-favorites')
+  .get(recipeController.aliasFamilyFaves, recipeController.getAllRecipes);
+
+router
   .route('/')
   .get(recipeController.getAllRecipes)
   .post(recipeController.createRecipe);

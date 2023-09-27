@@ -1,8 +1,23 @@
 const Recipe = require('../models/recipeModel');
+const APIFeatures = require('../utils/apiFeatures');
+
+exports.aliasFamilyFaves = (req, res, next) => {
+  req.query.limit = '5';
+  req.query.sort = '-rating,name';
+  req.query.fields = 'name,description';
+  next();
+};
 
 exports.getAllRecipes = async (req, res) => {
   try {
-    const recipes = await Recipe.find();
+    const results = new APIFeatures(Recipe.find(), req.query)
+      .filter()
+      .sort()
+      .limitFields()
+      .paginate();
+    const recipes = await results.query;
+
+    //send response
     res.status(200).json({
       status: 'success',
       requestedAt: req.requestTime,
