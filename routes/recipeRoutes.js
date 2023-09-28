@@ -8,6 +8,7 @@ const router = express.Router();
 router
   .route('/family-favorites')
   .get(recipeController.aliasFamilyFaves, recipeController.getAllRecipes);
+router.route('/recipe-stats').get(recipeController.getRecipeStats);
 
 router
   .route('/')
