@@ -1,5 +1,6 @@
 const express = require('express');
 const recipeController = require('../controllers/recipeController');
+const authController = require('../controllers/authController');
 
 const router = express.Router();
 
@@ -12,7 +13,7 @@ router.route('/recipe-stats').get(recipeController.getRecipeStats);
 
 router
   .route('/')
-  .get(recipeController.getAllRecipes)
+  .get(authController.protect, recipeController.getAllRecipes)
   .post(recipeController.createRecipe);
 
 router
