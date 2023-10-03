@@ -20,6 +20,10 @@ router
   .route('/:id')
   .get(recipeController.getRecipe)
   .patch(recipeController.updateRecipe)
-  .delete(recipeController.deleteRecipe);
+  .delete(
+    authController.protect,
+    authController.restrictTo('admin'),
+    recipeController.deleteRecipe,
+  );
 
 module.exports = router;
