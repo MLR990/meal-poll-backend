@@ -2,6 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
 const rateLimit = require('express-rate-limit');
+const helmet = require('helmet');
 
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
@@ -13,9 +14,13 @@ const app = express();
 app.use(cors());
 
 //Global Middleware
+//security http headers
+app.use(helmet());
+//dev logging
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
+//rate limiting
 const limiter = rateLimit({
   max: 3,
   windowMs: 60 * 60 * 1000,
@@ -24,8 +29,9 @@ const limiter = rateLimit({
 
 app.use('/api', limiter);
 
-app.use(express.json());
-
+//body parsing
+app.use(express.json({ limit: '10kb' }));
+//middleware test
 app.use((req, res, next) => {
   req.requestTime = new Date().toISOString();
   next();
