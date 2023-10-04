@@ -31,6 +31,9 @@ app.use('/api', limiter);
 
 //body parsing
 app.use(express.json({ limit: '10kb' }));
+
+//serve up any static files
+app.use(express.static(`${__dirname}/public`));
 //middleware test
 app.use((req, res, next) => {
   req.requestTime = new Date().toISOString();
