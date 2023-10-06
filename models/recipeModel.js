@@ -77,10 +77,11 @@ recipeSchema.pre(/^find/, function (next) {
   this.start = Date.now();
   next();
 });
-recipeSchema.post(/^find/, function (docs, next) {
-  console.log(`Query Took: ${Date.now() - this.start} milliseconds`);
-  next();
-});
+
+// recipeSchema.post(/^find/, function (docs, next) {
+//   console.log(`Query Took: ${Date.now() - this.start} milliseconds`);
+//   next();
+// });
 
 //AGGREGATION MIDDLEWARE
 recipeSchema.pre('aggregate', function (next) {

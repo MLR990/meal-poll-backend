@@ -2,14 +2,20 @@ const mongoose = require('mongoose');
 const slugify = require('slugify');
 const Recipe = require('./recipeModel');
 
-const householdSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: [true, 'A household must have a name'],
+const householdSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: [true, 'A household must have a name'],
+    },
+    members: [{ type: mongoose.Schema.ObjectId, ref: 'User' }],
+    recipes: Array,
   },
-  members: [{ type: mongoose.Schema.ObjectId, ref: 'User' }],
-  recipes: Array,
-});
+  {
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
+  },
+);
 
 householdSchema.pre(/^find/, function (next) {
   this.populate({
