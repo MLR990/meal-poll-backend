@@ -11,7 +11,7 @@ const recipeSchema = new mongoose.Schema(
       minLength: [5, 'A recipe name must have at least 5 characters'],
       // validate: [
       //   validator.isAlpha,
-      //   'Recipe name must only contain characteres',
+      //   'Recipe name must only contain characters',
       // ],  Does not work with spaces so just keeping for memory
     },
     slug: String,
