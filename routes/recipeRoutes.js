@@ -13,7 +13,7 @@ router.route('/recipe-stats').get(recipeController.getRecipeStats);
 
 router
   .route('/')
-  .get(authController.protect, recipeController.getAllRecipes)
+  .get(recipeController.getAllRecipes)
   .post(recipeController.createRecipe);
 
 router

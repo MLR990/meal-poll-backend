@@ -25,7 +25,6 @@ const recipeSchema = new mongoose.Schema(
     },
     rating: {
       type: Number,
-      default: 4,
       min: [1, 'Rating cannot be lower than 1'],
       max: [10, 'Rating must be 10 or below'],
     },
